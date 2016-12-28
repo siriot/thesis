@@ -1,0 +1,31 @@
+/*
+  * Device tree overlay for AXI Timer peripheral in Zynq-7000 SoC PL section
+  * Written by Tusori Tibor
+  */
+/dts-v1/;
+/plugin/;
+
+/{
+	compatible =  "xlnx,zynq-7000";
+	
+
+	fragment@0{
+		target=<&amba_pl>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		__overlay__{
+
+		my_id_reg_0: my_id_reg@43c00000 {
+			compatible = "xlnx,my-id-reg-2.0";
+			reg = <0x43c00000 0x10000>;
+			interrupt-parent = <&intc>;
+			interrupts = <0 29 4>;
+			xlnx,s00-axi-addr-width = <0x4>;
+			xlnx,s00-axi-data-width = <0x20>;
+		};
+
+		}; /*overlay*/
+	}; /*fragment*/
+};
+	
+			

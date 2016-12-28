@@ -1,0 +1,39 @@
+/*
+  * Device tree overlay for AXI Timer peripheral in Zynq-7000 SoC PL section
+  * Written by Tusori Tibor
+  */
+/dts-v1/;
+/plugin/;
+
+/{
+	compatible =  "xlnx,zynq-7000";
+	
+
+	fragment@0{
+		target=<&amba_pl>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		__overlay__{
+
+			test_timer: timer@43c10000 {
+												#address-cells=<1>;
+												#size-cells=<1>;
+												clock-frequency = <100000000>;
+												clock-names = "ref_clk";
+												clocks = <&clkc 0>;
+												compatible = "xlnx,xps-timer-1.00.a";
+												interrupt-parent = <&intc>;
+												interrupts = <0 30 4>;
+												reg = <0x43c10000 0x10000>;
+												xlnx,count-width = <0x20>;
+												xlnx,gen0-assert = <0x1>;
+												xlnx,gen1-assert = <0x1>;
+												xlnx,one-timer-only = <0x1>;
+												xlnx,trig0-assert = <0x1>;
+												xlnx,trig1-assert = <0x1>;
+						};/*timer*/
+			}; /*overlay*/
+		}; /*fragment*/
+};
+	
+			
